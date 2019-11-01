@@ -2,13 +2,15 @@
 <head>
     <title>first day in full stock web</title>
     <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 
 
 <div class="main">
-    <p class="sign" align="center">Sign In</p>
+    <p class="sign" align="center">Sign <span class="fa fa-info"  style="color: #f80300"></span>
+        in</p>
     <form class="form1" action="#">
         <div class="form_input">
             <input class="fild" id="userName" type="text" align="center" placeholder="Username">
@@ -34,6 +36,13 @@
 
 
         <div class="form_input" >
+            <input class="fild"  type="text" align="center" placeholder="phone 1">
+            <span  onclick="addInput()" class="add_btn"> + </span>
+
+        </div>
+
+
+        <div class="form_input" id="phone">
             <input class="fild" id="CEmail" type="email" align="center" placeholder="confirm email">
             <span class="required_lable"> * </span>
 
@@ -60,7 +69,7 @@
 
         <div class="form_input">
             <input class="fild" id="image_btn" type="file" align="center" >
-            <img src="default.PNG" id="image" alt=" "/>
+            <img src="" id="image" alt=" "/>
 
         </div>
 
@@ -72,8 +81,15 @@
     </form>
 
 
+    <button class="trigger"> Hello user </button>
 
-
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-button" >&times; </span>
+            <span  class="fa fa-info-circle info" style=" color: #28f6ff; font-size: 30px">  </span>
+            <h2 style="float: right ;margin-top: 40px;">Hello, I am a modal!</h2>
+        </div>
+    </div>
 
 
 </div>
@@ -246,6 +262,87 @@ var inputs=document.getElementsByClassName('fild');
 
 
 
+
+    /**************************/
+
+    var modal = document.querySelector(".modal");
+    var trigger = document.querySelector(".trigger");
+    var closeButton = document.querySelector(".close-button");
+
+    function toggleModal() {
+        modal.classList.toggle("show-modal");
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal) {
+            toggleModal();
+        }
+    }
+
+    trigger.addEventListener("click", toggleModal);
+    closeButton.addEventListener("click", toggleModal);
+    window.addEventListener("click", windowOnClick);
+
+    /********************************************/
+/*
+
+
+        <div class="form_input" id="phone">
+            <input class="fild"  type="text" align="center" placeholder="phone">
+            <span class="required_lable"> * </span>
+            <span id="delete_phone"> * </span>
+
+        </div>
+
+*/
+
+var phone_num=1;
+
+    function  addInput() {
+        phone_num++;
+        var element=document.createElement("input");
+        var div=document.createElement("div") ;
+        var sp=document.createElement("span") ;
+
+        var ph=document.getElementById("phone");
+
+        var attr=document.createAttribute('class');
+        attr.value="fild";
+        var attr2=document.createAttribute('placeholder');
+        attr2.value="anthor phone ";
+
+        var attr3=document.createAttribute('class');
+        attr3.value="delete_phone";
+
+
+ var attr4=document.createAttribute('onclick');
+        attr4.value="deleteElement(this)";
+
+
+        element.setAttributeNode(attr);
+        element.setAttributeNode(attr2);
+
+
+        sp.setAttributeNode(attr3);
+        sp.setAttributeNode(attr4);
+sp.innerText="x";
+div.appendChild(element);
+        div.appendChild(sp);
+
+        ph.insertBefore(div,ph.childNodes[0]);
+
+//alert("sssssssssss");
+
+
+    }
+
+    var _delete= document.getElementsByClassName("delete_phone");
+  function deleteElement(e) {
+//alert("sssssss");
+      var p=e.parentNode;
+      p.remove();
+//      e.parentNode.style.display = 'none';
+    }
 
 </script>
 </body>
